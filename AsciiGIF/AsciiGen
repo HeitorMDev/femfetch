@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+# frames2ascii_json.sh
+# Converts all frames in INPUT_DIR to colored ASCII JSON frames
+# Supports selectable character sets
+
+INPUT_DIR="$HOME/.local/share/femfetch/raw_frames"
+OUTPUT_DIR="$HOME/.local/share/femfetch/frames"
+WIDTH="${1:-80}"        # Default width
+ASGIF_ASPECT="0.55"
+CHARS="%*"  # default charset
+
+# =======================
+# Charsets options
+# =======================
+# Option 1: Default
+CHARSET1='%*'
+# Option 2: Blocks
+CHARSET2='█▓▒░'
+# Option 3: Basic ASCII
+CHARSET3='@#$%*+.'
+# Option 4: Letters
+CHARSET4='MNBKXhijklt1!i·'
+# Option 5: Dots and symbols
+CHARSET5='.:;i1'
+# Option 6: Full grayscale (common)
+CHARSET6='@B%W#*o+=-:. '
+
+# =======================
+# Parse optional flag --chars N
+# =======================
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --chars)
+            shift
+            case "$1" in
+                1) CHARS="$CHARSET1" ;;
+                2) CHARS="$CHARSET2" ;;
+                3) CHARS="$CHARSET3" ;;
+                4) CHARS="$CHARSET4" ;;
+                5) CHARS="$CHARSET5" ;;
+                6) CHARS="$CHARSET6" ;;
+                *) echo "Invalid charset option. Use 1-6."; exit 1 ;;
+            esac
+            shift
+            ;;
+        *) shift ;;
+    esac
+done
+
+# =======================
+# Remove old JSON frames
+# =======================
+rm -f "$OUTPUT_DIR"/*.json
+
+# =======================
+# Convert images
+# =======================
+FIRST_IMAGE=$(find "$INPUT_DIR" -maxdepth 1 -type f | sort -V | head -n 1)
+if [[ -z "$FIRST_IMAGE" ]]; then
+    echo "No image found in $INPUT_DIR"
+    exit 1
+fi
+
+EXT="${FIRST_IMAGE##*.}"
+
+# Convert non-PNG to PNG
+if [[ "$EXT" != "png" ]]; then
+    TMP_DIR="$(mktemp -d)"
+    trap 'rm -rf "$TMP_DIR"' EXIT
+    find "$INPUT_DIR" -maxdepth 1 -type f | sort -V | while IFS= read -r IMG; do
+        CHANNELS=$(magick identify -format "%[channels]" "$IMG")
+        OUT="$TMP_DIR/$(basename "$IMG")"
+        if [[ "$CHANNELS" != *a* ]]; then
+            magick "$IMG" -alpha on -channel A -evaluate set 100% "$OUT"
+        else
+            cp "$IMG" "$OUT"
+        fi
+    done
+    FINAL_DIR="$TMP_DIR"
+else
+    FINAL_DIR="$INPUT_DIR"
+fi
+
+# Convert each image to JSON
+find "$FINAL_DIR" -maxdepth 1 -type f | sort -V | while IFS= read -r IMAGE; do
+    NUM=1
+    while [ -f "$OUTPUT_DIR/$NUM.json" ]; do ((NUM++)); done
+    OUT_FILE="$OUTPUT_DIR/$NUM.json"
+
+    read IMG_W IMG_H < <(magick identify -format "%w %h" "$IMAGE")
+    HEIGHT=$(awk -v w="$WIDTH" -v iw="$IMG_W" -v ih="$IMG_H" -v a="${ASGIF_ASPECT:-0.55}" \
+        'BEGIN { printf "%d", (w/iw)*ih*a }')
+
+    echo "{" > "$OUT_FILE"
+    echo "  \"width\": $WIDTH," >> "$OUT_FILE"
+    echo "  \"height\": $HEIGHT," >> "$OUT_FILE"
+    echo "  \"pixels\": [" >> "$OUT_FILE"
+
+    magick "$IMAGE" -resize "${WIDTH}x${HEIGHT}!" -depth 8 txt:- | tail -n +2 | \
+    awk -v width="$WIDTH" -v chars="$CHARS" '
+        BEGIN { first=1; len=length(chars) }
+        {
+            match($0,/([0-9]+),([0-9]+),([0-9]+)(,([0-9]+))?/, a)
+            r=a[1]; g=a[2]; b=a[3]
+            alpha = (a[5] == "" ? 255 : a[5])
+            val = 0.299*r + 0.587*g + 0.114*b
+            if(alpha < 15){ c=" " } else { idx=int(val/256*len); if(idx>=len) idx=len-1; c=substr(chars,idx+1,1) }
+            x=(NR-1)%width
+            y=int((NR-1)/width)
+            if(!first) printf(",\n"); first=0
+            printf("    {\"x\":%d,\"y\":%d,\"r\":%d,\"g\":%d,\"b\":%d,\"char\":\"%s\",\"brightness\":%.2f}", x,y,r,g,b,c,val)
+        }
+    ' >> "$OUT_FILE"
+
+    echo -e "\n  ]\n}" >> "$OUT_FILE"
+    echo "JSON saved to: $OUT_FILE"
+done

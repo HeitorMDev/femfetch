@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+import os
+from pathlib import Path
+import sys
+import subprocess
+import shutil
+
+if len(sys.argv) < 2:
+    print(f"Usage: {sys.argv[0]} <video>")
+    sys.exit(1)
+
+video_path = Path(sys.argv[1])
+if not video_path.is_file():
+    print(f"Error: File '{video_path}' does not exist.")
+    sys.exit(1)
+
+# Use XDG_DATA_HOME or fallback
+output_dir = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share")) / "femfetch/raw_frames"
+output_dir.mkdir(parents=True, exist_ok=True)
+
+# Remove any file in the output_dir
+for item in output_dir.iterdir():
+    if item.is_dir():
+        shutil.rmtree(item)
+    else:
+        item.unlink()
+
+# Extract frames using ffmpeg
+subprocess.run([
+    "ffmpeg",
+    "-i", str(video_path),
+    "-vsync", "0",
+    str(output_dir / "%04d.png")
+], check=True)
+
+print(f"Frames saved to: {output_dir}")

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Load configuration
+CONF="${XDG_CONFIG_HOME:-$HOME/.config}/femfetch/femfetch.conf"
+[[ -f "$CONF" ]] && source "$CONF"
+
+# Frames directory: use argument if provided, otherwise use FRAME_DIR from config
+if [ -z "$1" ]; then
+    FRAMES="$FRAME_DIR"
+else
+    FRAMES="$1"
+fi
+
+# Path to the Python renderer script
+RENDER="$HOME/bin/AsciiGIF/renderJ.py"
+
+# FPS configuration
+FPS=$GLOBAL_FPS
+
+# Calculate delay per frame in seconds (floating point)
+DELAY=$(bc -l <<< "1 / $FPS")
+
+# Optional: calculate delay in milliseconds for more precise timing on some systems
+DELAY_MS=$(awk "BEGIN {print int(1000 / $FPS + 0.5)}")  # e.g., 17ms for 60fps
+
+# Collect all JSON frames in the directory, sorted naturally (version sort)
+shopt -s nullglob
+mapfile -t files < <(find "$FRAMES" -maxdepth 1 -name '*.json' -print | sort -V)
+
+# Hide the terminal cursor while animation runs
+echo -ne "\033[?25l"
+
+# Infinite animation loop
+while true; do
+    for f in "${files[@]}"; do
+        # Each frame is rendered by the Python script
+        python3 "$RENDER" "$f" "$GIF_HEIGHT" "$GIF_WIDTH"
+        
+        # Sleep for the calculated delay (seconds)
+        sleep "$DELAY"
+        
+        # Alternative more stable sleep using milliseconds (if needed):
+        # sleep "${DELAY_MS}e-3"
+    done
+done
