@@ -28,7 +28,7 @@ package() {
     # -------------------------------
     # Executables
     # -------------------------------
-    install -Dm755 "bin/femfetch.sh" "$pkgdir/usr/bin/femfetch"
+    install -Dm755 "bin/femfetch" "$pkgdir/usr/bin/femfetch"
     install -Dm755 "bin/femfetch-info.sh" "$pkgdir/usr/bin/femfetch-info"
 
     # -------------------------------
