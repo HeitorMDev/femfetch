@@ -12,18 +12,18 @@ source=("https://github.com/HeitorMDev/femfetch/archive/refs/tags/v$pkgver.tar.g
 sha256sums=('SKIP') # replace with actual sha256sum
 
 pkgver() {
-    cd "$srcdir/femfetch-0.9b"
+    cd "$srcdir/femfetch"
     echo "0.9b"
 }
 
 build() {
-    cd "$srcdir/femfetch-0.9b"
+    cd "$srcdir/femfetch"
     # nothing to compile, all scripts are interpreted
     :
 }
 
 package() {
-    cd "$srcdir/femfetch-0.9b"
+    cd "$srcdir/femfetch"
 
     # -------------------------------
     # Executables
