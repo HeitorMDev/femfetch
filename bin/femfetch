@@ -7,14 +7,14 @@
 # -----------------------------
 # Load paths
 # -----------------------------
-source "$(dirname "$(readlink -f "$0")")/paths.sh"
+source "/usr/share/femfetch/paths.sh"
 # `paths.sh` centralizes all paths for configs, data, frames, etc.
 
 # -----------------------------
 # Load configuration if exists
 # -----------------------------
-CONF="$CONFIG_DIR/femfetch.conf"
-[[ -f "$CONF" ]] && source "$CONF"
+
+[[ -z "CONFIG_DIR" ]] && source "$CONFIG_DIR/femfetch.conf"
 
 # -----------------------------
 # Load helper libraries

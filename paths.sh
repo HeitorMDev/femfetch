@@ -7,11 +7,15 @@
 # -------------------------------
 # XDG-compliant configuration and data directories
 # -------------------------------
-CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/femfetch"
+if [[ -e "$HOME/.config/femfetch/femfetch.conf"]]; then
+    CONFIG_DIR="$HOME/.config/femfetch/femfetch.conf"
+else
+    CONFIG_DIR="/etc/femfetch.conf"
+fi
 # CONFIG_DIR: Where user-specific configuration files are stored.
 # Uses $XDG_CONFIG_HOME if defined, otherwise defaults to $HOME/.config/femfetch
 
-DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/femfetch"
+DATA_DIR="/usr/share/femfetch"
 # DATA_DIR: Base directory for storing femfetch data (frames, gifs, pids, ascii)
 # Uses $XDG_DATA_HOME if defined, otherwise defaults to $HOME/.local/share/femfetch
 
@@ -37,7 +41,7 @@ SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 # SCRIPT_DIR: Absolute path to the directory containing this script
 # readlink -f resolves symbolic links to get the real path
 
-LIB_DIR="$SCRIPT_DIR/lib"
+LIB_DIR="$DATA_DIR/lib"
 # LIB_DIR: Directory where helper libraries or scripts are located
 
 # -------------------------------
