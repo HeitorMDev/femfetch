@@ -21,7 +21,7 @@ source "/usr/share/femfetch/paths.sh"
 # -----------------------------
 source "$LIB_DIR/render.sh"         # Rendering functions
 source "$LIB_DIR/layout.sh"         # Layout helpers (padding, width)
-source "$LIB_DIR/femfetch-info.sh"     # Functions that collect system info
+source "$usr/bin/femfetch-info.sh"     # Functions that collect system info
 
 # -----------------------------
 # Defaults
