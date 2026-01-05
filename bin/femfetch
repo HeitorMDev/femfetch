@@ -21,7 +21,7 @@ CONF="$CONFIG_DIR/femfetch.conf"
 # -----------------------------
 source "$LIB_DIR/render.sh"         # Rendering functions
 source "$LIB_DIR/layout.sh"         # Layout helpers (padding, width)
-source "$LIB_DIR/femfetch-info"     # Functions that collect system info
+source "$LIB_DIR/femfetch-info.sh"     # Functions that collect system info
 
 # -----------------------------
 # Defaults
