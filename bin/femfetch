@@ -14,14 +14,16 @@ source "/usr/share/femfetch/paths.sh"
 # Load configuration if exists
 # -----------------------------
 
-[[ -z "CONFIG_DIR" ]] && source "$CONFIG_DIR/femfetch.conf"
+[[ -n "$CONFIG_DIR" ]] && source "$CONFIG_DIR/femfetch.conf"
+
+[[ -z "$LIB_DIR" ]] && LIB_DIR="/usr/share/femfetch/libs"
 
 # -----------------------------
 # Load helper libraries
 # -----------------------------
 source "$LIB_DIR/render.sh"         # Rendering functions
 source "$LIB_DIR/layout.sh"         # Layout helpers (padding, width)
-source "$usr/bin/femfetch-info.sh"     # Functions that collect system info
+source "/usr/bin/femfetch-info.sh"     # Functions that collect system info
 
 # -----------------------------
 # Defaults
@@ -109,7 +111,7 @@ fi
 # -----------------------------
 # User@Host
 # -----------------------------
-USER_LINE=("$C_ACCENT $(whoami)@$(hostname) $C_RESET")
+USER_LINE=("$C_ACCENT $(whoami)@$(echo $HOSTNAME) $C_RESET")
 print_user_host "$SKIPPING_LINES" "$INFO_COL" "$USER_LINE"
 ((SKIPPING_LINES++))
 

@@ -8,9 +8,9 @@
 # XDG-compliant configuration and data directories
 # -------------------------------
 if [[ -e "$HOME/.config/femfetch/femfetch.conf"]]; then
-    CONFIG_DIR="$HOME/.config/femfetch/femfetch.conf"
+    CONFIG_DIR="$HOME/.config/femfetch/"
 else
-    CONFIG_DIR="/etc/femfetch.conf"
+    CONFIG_DIR="/etc"
 fi
 # CONFIG_DIR: Where user-specific configuration files are stored.
 # Uses $XDG_CONFIG_HOME if defined, otherwise defaults to $HOME/.config/femfetch
