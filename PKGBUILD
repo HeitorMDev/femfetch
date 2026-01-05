@@ -54,7 +54,7 @@ package() {
     # -------------------------------
     install -d "$pkgdir/usr/share/femfetch/frames"
     install -d "$pkgdir/usr/share/femfetch/distros"
-    cp -r frames/* "$pkgdir/usr/share/femfetch/frames/"
+    cp -r ascii/* "$pkgdir/usr/share/femfetch/ascii/"
     cp -r distros/* "$pkgdir/usr/share/femfetch/distros/"
 
     # -------------------------------
@@ -66,11 +66,6 @@ package() {
     # Configuration
     # -------------------------------
     install -Dm644 "femfetch.conf" "$pkgdir/etc/femfetch.conf"
-
-    # -------------------------------
-    # Info script
-    # -------------------------------
-    install -Dm755 "info.sh" "$pkgdir/usr/share/femfetch/info.sh"
 
     # -------------------------------
     # Paths helper
