@@ -54,7 +54,9 @@ package() {
     # -------------------------------
     install -d "$pkgdir/usr/share/femfetch/frames"
     install -d "$pkgdir/usr/share/femfetch/distros"
+    install -d "$pkgdir/usr/share/femfetch/ascii"
     cp -r ascii/* "$pkgdir/usr/share/femfetch/ascii/"
+    cp -r frames/* "$pkgdir/usr/share/femfetch/frames/"
     cp -r distros/* "$pkgdir/usr/share/femfetch/distros/"
 
     # -------------------------------
