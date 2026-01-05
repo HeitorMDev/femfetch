@@ -29,7 +29,8 @@ package() {
     # Executables
     # -------------------------------
     install -Dm755 "bin/femfetch" "$pkgdir/usr/bin/femfetch"
-    install -Dm755 "bin/femfetch-info.sh" "$pkgdir/usr/bin/femfetch-info.sh"
+    install -Dm755 -t "$pkgdir/usr/bin/AsciiGIF" loadGIF           # rawGifer
+    install -Dm755 -t "$pkgdir/usr/bin/AsciiGIF" AsciiGen          # AsciiGen
 
     # -------------------------------
     # Libraries / helpers
@@ -40,8 +41,6 @@ package() {
     # AsciiGIF tools
     # -------------------------------
     install -Dm755 -t "$pkgdir/usr/share/femfetch/AsciiGIF" AsciiGIF/*        # asgif, renderJ.py
-    install -Dm755 -t "$pkgdir/usr/share/femfetch/AsciiGIF" loadGIF           # rawGifer
-    install -Dm755 -t "$pkgdir/usr/share/femfetch/AsciiGIF" AsciiGen          # AsciiGen
 
 
     # -------------------------------
@@ -67,7 +66,13 @@ package() {
     # -------------------------------
     # Configuration
     # -------------------------------
-    install -Dm644 "femfetch.conf" "$pkgdir/etc/femfetch.conf"
+    install -d "$pkgdir/etc/femfetch"
+    install -Dm644 "femfetch.conf" "$pkgdir/etc/femfetch/femfetch.conf"
+
+    # ------------------------------
+    # Information
+    # ------------------------------
+    install -Dm755 "bin/femfetch-info.sh" "$pkgdir/usr/share/femfetch/lib/femfetch-info.sh"
 
     # -------------------------------
     # Paths helper

@@ -16,14 +16,12 @@ source "/usr/share/femfetch/paths.sh"
 
 [[ -n "$CONFIG_DIR" ]] && source "$CONFIG_DIR/femfetch.conf"
 
-[[ -z "$LIB_DIR" ]] && LIB_DIR="/usr/share/femfetch/libs"
-
 # -----------------------------
 # Load helper libraries
 # -----------------------------
 source "$LIB_DIR/render.sh"         # Rendering functions
 source "$LIB_DIR/layout.sh"         # Layout helpers (padding, width)
-source "/usr/bin/femfetch-info.sh"     # Functions that collect system info
+source "$LIB_DIR/femfetch-info.sh"     # Functions that collect system info
 
 # -----------------------------
 # Defaults
@@ -96,8 +94,12 @@ printf '%s\n' "${LEFT_RENDER[@]}"   # Print ASCII art (left)
 # Header (figlet)
 # -----------------------------
 if [[ ${SHOW_HEADER:-0} == 1 ]]; then
-    FONT="${ITALIC_HEADER:-no}" 
-    FIG_HEADER=$(figlet -w 999 ${FONT:="sm"} "${CUSTOM_HEADER:-$version}" 2>/dev/null || echo "$version")
+    if [[ "$ITALIC_HEADER:-no" == "yes" ]]; then
+        FIG_HEADER=$(figlet -w 999 -f smslant "${CUSTOM_HEADER:-$version}" 2>/dev/null || echo "$version")
+    else
+        FIG_HEADER=$(figlet -w 999 "${CUSTOM_HEADER:-$version}" 2>/dev/null || echo "$version")
+    fi
+
     while read -r line; do
         ((SKIPPING_LINES++))
         # Align header left or right
@@ -171,7 +173,7 @@ used=$(print_group_n INFO_HARDWARE "$SKIPPING_LINES")
 if [[ "$ANIMATION" == "yes" ]]; then
     DISTRO=$(bash "$LIB_DIR/logoLoader.sh")      # Detect distro
     GIF_FINAL="$DISTRO_GIF_DIR/$DISTRO"
-    bash "$LIB_DIR/animKiller.sh" &              # Kill previous animation
+    bash "$DATA_DIR/animKiller.sh" &              # Kill previous animation
     bash "$DATA_DIR/AsciiGIF/asgif" "$GIF_FINAL" &  # Launch GIF render
 else
     DISTRO=$(bash "$LIB_DIR/logoLoader.sh")

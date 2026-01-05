@@ -1,23 +1,20 @@
 #!/usr/bin/env bash
 # paths.sh - Centralizes all paths for femfetch
 # ==========================================================
-# This script defines and prepares all directories used by femfetch.
-# It ensures portability by using XDG standard paths when available.
+# This script defines and prepares all directories used by femfetch..
 
 # -------------------------------
-# XDG-compliant configuration and data directories
+# configuration and data directories
 # -------------------------------
-if [[ -e "$HOME/.config/femfetch/femfetch.conf"]]; then
+if [[ -e "$HOME/.config/femfetch/femfetch.conf" ]]; then
     CONFIG_DIR="$HOME/.config/femfetch/"
 else
-    CONFIG_DIR="/etc"
+    CONFIG_DIR="/etc/femfetch"
 fi
 # CONFIG_DIR: Where user-specific configuration files are stored.
-# Uses $XDG_CONFIG_HOME if defined, otherwise defaults to $HOME/.config/femfetch
 
 DATA_DIR="/usr/share/femfetch"
 # DATA_DIR: Base directory for storing femfetch data (frames, gifs, pids, ascii)
-# Uses $XDG_DATA_HOME if defined, otherwise defaults to $HOME/.local/share/femfetch
 
 # -------------------------------
 # Specific data subdirectories
@@ -47,6 +44,5 @@ LIB_DIR="/usr/share/femfetch/lib"
 # -------------------------------
 # Ensure all required directories exist
 # -------------------------------
-mkdir -p "$CONFIG_DIR" "$DATA_DIR" "$FRAME_DIR" "$DISTRO_GIF_DIR" "$PID_DIR" "$ASCII_DIR"
 # Creates all directories if they do not exist
 # -p ensures parent directories are created without error if they already exist
