@@ -19,9 +19,9 @@ source "/usr/share/femfetch/paths.sh"
 # -----------------------------
 # Load helper libraries
 # -----------------------------
-source "$LIB_DIR/render.sh"         # Rendering functions
-source "$LIB_DIR/layout.sh"         # Layout helpers (padding, width)
-source "$LIB_DIR/femfetch-info.sh"     # Functions that collect system info
+source "/usr/share/femfetch/lib/render.sh"         # Rendering functions
+source "/usr/share/femfetch/lib/layout.sh"         # Layout helpers (padding, width)
+source "/usr/share/femfetch/lib/femfetch-info.sh"     # Functions that collect system info
 
 # -----------------------------
 # Defaults
@@ -113,7 +113,7 @@ fi
 # -----------------------------
 # User@Host
 # -----------------------------
-USER_LINE=("$C_ACCENT $(whoami)@$(echo $HOSTNAME) $C_RESET")
+USER_LINE=$(echo "$(whoami)@$(echo $HOSTNAME)")
 print_user_host "$SKIPPING_LINES" "$INFO_COL" "$USER_LINE"
 ((SKIPPING_LINES++))
 
