@@ -7,6 +7,9 @@
 # -------------------------------
 # Print user@host line at specific coordinates
 # -------------------------------
+
+source "/usr/share/femfetch/lib/layout.sh"
+
 print_user_host() {
     local line="$1" pad="$2" usr_line="$3"
     # Move the cursor to the specified line and column (pad)
