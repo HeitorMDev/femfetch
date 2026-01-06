@@ -146,6 +146,19 @@ declare -A info_values
 # -----------------------------
 # Calculate max label width
 # -----------------------------
+
+declare -a INFO_SOFTWARE=(
+    "OS" "Host" "Kernel" "Uptime" "Packages" "Shell"
+    "Display" "WM" "Theme" "Icons" "Cursor" "Font" "Terminal"
+    "Local IP" "Locale"
+)
+
+# ---------------- Hardware ----------------
+declare -a INFO_HARDWARE=(
+    "CPU" "GPU" "Memory" "Swap" "Disk"
+)
+
+
 max_label=0
 for label in "${!info_values[@]}"; do
     (( ${#label} > max_label )) && max_label=${#label}
