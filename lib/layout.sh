@@ -8,6 +8,10 @@ calc_left_width() {
     done
 }
 
+strip_ansi() {
+    sed -r 's/\x1B\[[0-9;?]*[ -/]*[@-~]//g'
+}
+
 calc_max_group_width() {
     local -n group=$1
     local max=0
