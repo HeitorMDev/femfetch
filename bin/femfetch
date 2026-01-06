@@ -184,11 +184,11 @@ fi
 [[ "$SEPARATOR_GROUP" == "yes" ]] && print_separator INFO_SOFTWARE
 print_group INFO_SOFTWARE "$SKIPPING_LINES"
 used=$(print_group_n INFO_SOFTWARE "$SKIPPING_LINES")
-((SKIPPING_LINES += used + 1))
+((SKIPPING_LINES += used))
 [[ "$SEPARATOR_GROUP" == "yes" ]] && print_separator INFO_SOFTWARE
 print_group INFO_HARDWARE "$SKIPPING_LINES"
 used=$(print_group_n INFO_HARDWARE "$SKIPPING_LINES")
-((SKIPPING_LINES += used + 1))
+((SKIPPING_LINES += used))
 
 # -----------------------------
 # GIF / ASCII rendering
