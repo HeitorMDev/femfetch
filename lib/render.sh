@@ -79,11 +79,11 @@ print_separator() {
     local sep=$1
     local width
     # Calculate max width for the group (from a helper function)
-    width=$(calc_max_group_width sep)
+    width=$(calc_max_group_width "$sep")
 
     # Move cursor and print a line of dashes with color
     tput cup "$SKIPPING_LINES" "$INFO_COL"
-    printf "%b%*s%b\n" "$C_VALUE" "$width" "$C_RESET" | tr ' ' '-'
+    printf "%b%*s%b\n" "$C_VALUE" "$width" "" "$C_RESET" | tr ' ' '-'
 
     ((SKIPPING_LINES++))  # Increment skipped line counter
 }
