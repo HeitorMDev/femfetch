@@ -20,7 +20,8 @@ print_user_host() {
 # Print a group of info fields to stdout
 # -------------------------------
 print_group() {
-    local -n group=$1 start_line=$2 idx=0
+    local -n group=$1 
+    local start_line=$2 idx=0
 
     for label in "${group[@]}"; do
         # Skip if field is disabled or empty
@@ -52,7 +53,8 @@ print_group() {
 # Print a group of info fields to stderr (for debug or overlay)
 # -------------------------------
 print_group_n() {
-    local -n group=$1 start_line=$2 idx=0
+    local -n group=$1 
+    local start_line=$2 idx=0
 
     for label in "${group[@]}"; do
         [[ ${SHOW[$label]:-0} != 1 || -z ${info_values[$label]} ]] && continue
