@@ -94,19 +94,28 @@ printf '%s\n' "${LEFT_RENDER[@]}"   # Print ASCII art (left)
 # -----------------------------
 # Header (figlet)
 # -----------------------------
-if [[ ${SHOW_HEADER:-0} == 1 ]]; then
-    if [[ "$ITALIC_HEADER:-no" == "yes" ]]; then
-        FIG_HEADER=$(figlet -w 999 -f smslant "${CUSTOM_HEADER:-$version}" 2>/dev/null || echo "$version")
-    else
-        FIG_HEADER=$(figlet -w 999 "${CUSTOM_HEADER:-$version}" 2>/dev/null || echo "$version")
-    fi
+header_file="$DATA_DIR/femfetch_ascii.txt"
+declare -a HEADER_LINES=()
 
-    while read -r line; do
-        tput cup "$SKIPPING_LINES" "$INFO_COL"
-        printf "%b%s%b" "$C_TITLE" "$line" "$C_RESET"
-        ((SKIPPING_LINES++))
-    done <<< "$FIG_HEADER"
+if [[ ${SHOW_HEADER:-0} == 1 ]]; then
+    if [[ "${ITALIC_HEADER:-no}" == "yes" ]]; then
+        mapfile -t HEADER_LINES < <(
+            figlet -w 999 -f smslant "${CUSTOM_HEADER:-$version}" 2>/dev/null \
+            || echo "$version"
+        )
+    else
+        mapfile -t HEADER_LINES < <(
+            figlet -w 999 "${CUSTOM_HEADER:-$version}" 2>/dev/null \
+            || echo "$version"
+        )
+    fi
 fi
+for line in "${HEADER_LINES[@]}"; do
+    tput cup "$SKIPPING_LINES" "$INFO_COL"
+    printf "%b%s%b" "$C_TITLE" "$line" "$C_RESET"
+    ((SKIPPING_LINES++))
+done
+
 
 ((SKIPPING_LINES++)) # extra spacing
 
