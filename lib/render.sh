@@ -76,8 +76,7 @@ print_group_n() {
 # Print a horizontal separator line for groups
 # -------------------------------
 print_separator() {
-    sep=$1
-
+    local sep=$1
     local width
     # Calculate max width for the group (from a helper function)
     width=$(calc_max_group_width sep)
