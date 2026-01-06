@@ -17,18 +17,19 @@ source "/usr/share/femfetch/paths.sh"
 [[ -n "$CONFIG_DIR" ]] && source "$CONFIG_DIR/femfetch.conf"
 
 # -----------------------------
-# Load helper libraries
-# -----------------------------
-source "/usr/share/femfetch/lib/render.sh"         # Rendering functions
-source "/usr/share/femfetch/lib/layout.sh"         # Layout helpers (padding, width)
-source "/usr/share/femfetch/lib/femfetch-info.sh"     # Functions that collect system info
-
-# -----------------------------
 # Defaults
 # -----------------------------
 PADDING=${PADDING:-4}         # Default horizontal padding
 SKIPPING_LINES=0              # Tracks how many lines we already printed
 version="femfetch 0.9b"      # Default version
+
+# -----------------------------
+# Load helper libraries
+# -----------------------------
+
+source "/usr/share/femfetch/lib/layout.sh"         # Layout helpers (padding, width)
+source "/usr/share/femfetch/lib/femfetch-info.sh"     # Functions that collect system info
+source "/usr/share/femfetch/lib/render.sh"         # Rendering functions
 
 # -----------------------------
 # Colors

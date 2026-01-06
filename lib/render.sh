@@ -8,8 +8,6 @@
 # Print user@host line at specific coordinates
 # -------------------------------
 
-source "/usr/share/femfetch/lib/layout.sh"
-
 print_user_host() { 
     local line="$1" pad="$2" usr_line="$3"
     # Move the cursor to the specified line and column (pad)
@@ -76,15 +74,15 @@ print_group_n() {
 # Print a horizontal separator line for groups
 # -------------------------------
 print_separator() {
-    [[ "$SEPARATOR_GROUP" != "yes" ]] && return  # Exit if disabled
+    sep=$1
 
     local width
     # Calculate max width for the group (from a helper function)
-    width=$(calc_max_group_width INFO_SOFTWARE)
+    width=$(calc_max_group_width sep)
 
     # Move cursor and print a line of dashes with color
     tput cup "$SKIPPING_LINES" "$INFO_COL"
-    printf "%b%*s%b\n" "$C_VALUE" "$width" "" "$C_RESET" | tr ' ' '-'
+    printf "%b%*s%b\n" "$C_VALUE" "$width" "$C_RESET" | tr ' ' '-'
 
     ((SKIPPING_LINES++))  # Increment skipped line counter
 }
