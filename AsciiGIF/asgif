@@ -12,7 +12,7 @@ else
 fi
 
 # Path to the Python renderer script
-RENDER="$DATA_DIR/AsciiGIF/renderJ.py/AsciiGIF/renderJ.py"
+RENDER="$DATA_DIR/AsciiGIF/renderJ.py"
 
 # FPS configuration
 FPS=$GLOBAL_FPS
