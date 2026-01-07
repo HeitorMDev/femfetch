@@ -13,6 +13,31 @@
 ## Installation (Arch Linux)
 
 ```bash
+sudo apt install bash python3 imagemagick figlet
+
 git clone https://github.com/HeitorMDev/femfetch.git
 cd femfetch
 makepkg -si
+
+
+Instalation (Debian/Ubuntu)
+
+sudo apt install bash python3 imagemagick figlet git
+
+git clone https://github.com/HeitorMDev/femfetch.git
+cd femfetch
+sudo ./install.sh
+
+
+Instalation (Fedora)
+
+sudo dnf install bash python3 ImageMagick figlet git
+
+git clone https://github.com/HeitorMDev/femfetch.git
+cd femfetch
+sudo ./install.sh
+
+
+
+
+
