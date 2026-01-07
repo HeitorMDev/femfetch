@@ -40,8 +40,8 @@ print_group() {
         fi
 
         # Move cursor to the value column and print the value with color
-        [[ "$SPACE_LABELINFO" == "yes"]] && tput cup $((start_line + idx)) "$VALUE_START_COL"
-        [[ "$SPACE_LABELINFO" != "yes"]] && tput cup $((start_line + idx)) (( "${#label}" + 1))
+        [[ "$SPACE_LABELINFO" == "yes" ]] && tput cup $((start_line + idx)) "$VALUE_START_COL"
+        [[ "$SPACE_LABELINFO" != "yes" ]] && tput cup $((start_line + idx)) (( ${#label} + 1))
         printf "%b%s%b" "$C_VALUE" "$value" "$C_RESET"
 
         ((idx++))
