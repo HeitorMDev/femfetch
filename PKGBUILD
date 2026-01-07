@@ -35,7 +35,9 @@ package() {
     # -------------------------------
     # Libraries / helpers
     # -------------------------------
-    install -Dm755 -t "$pkgdir/usr/share/femfetch/lib" lib/*
+    install -d "$pkgdir/usr/share/femfetch/lib"
+    install -Dm644 lib/* "$pkgdir/usr/share/femfetch/lib/"
+
 
     # -------------------------------
     # AsciiGIF tools
