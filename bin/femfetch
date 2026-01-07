@@ -13,8 +13,7 @@ source "/usr/share/femfetch/paths.sh"
 # -----------------------------
 # Load configuration if exists
 # -----------------------------
-
-[[ -n "$CONFIG_DIR" ]] && source "$CONFIG_DIR/femfetch.conf"
+source "$CONFIG_DIR/femfetch.conf"
 
 # -----------------------------
 # Defaults
@@ -29,7 +28,7 @@ version="femfetch 0.9b"      # Default version
 
 source "$LIB_DIR/layout.sh"         # Layout helpers (padding, width)
 source "$LIB_DIR/femfetch-info.sh"     # Functions that collect system info
-source "$LIB_DIR/render.sh"         # Rendering functions
+source "$LIB_DIR/render.sh"
 
 # -----------------------------
 # Colors
@@ -181,7 +180,7 @@ fi
 # -----------------------------
 # Print info groups
 # -----------------------------
-[[ "$SEPARATOR_GROUP" == "yes" ]] && print_separator INFO_SOFTWARE
+print_separator INFO_SOFTWARE
 print_group INFO_SOFTWARE "$SKIPPING_LINES"
 used=$(print_group_n INFO_SOFTWARE "$SKIPPING_LINES")
 ((SKIPPING_LINES += used))
@@ -202,5 +201,5 @@ if [[ "$ANIMATION" == "yes" ]]; then
     sleep infinity
 else
     DISTRO=$(bash "$LIB_DIR/logoLoader.sh")
-    python3 "$DATA_DIR/AsciiGIF/renderJ.py" "$DATA_DIR/ascii/${DISTRO}.json" "$GIF_HEIGHT" "$GIF_WIDTH" --flat "$C_LABEL"
+    #python3 "$DATA_DIR/AsciiGIF/renderJ.py" "$DATA_DIR/ascii/${DISTRO}.json" "$GIF_HEIGHT" "$GIF_WIDTH" --flat "$C_LABEL"
 fi

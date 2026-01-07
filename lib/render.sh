@@ -20,35 +20,38 @@ print_user_host() {
 # Print a group of info fields to stdout
 # -------------------------------
 print_group() {
-    local -n group=$1 
-    local start_line=$2 idx=0
+    local -n group="$1"
+    local start_line="$2"
+    local idx=0
 
     for label in "${group[@]}"; do
-        # Skip if field is disabled or empty
-        [[ ${SHOW[$label]:-0} != 1 || -z ${info_values[$label]} ]] && continue
+        [[ "${SHOW[$label]:-0}" != 1 || -z "${info_values[$label]}" ]] && continue
 
-        # Trim leading spaces from the value
-        local value="${info_values[$label]#"${info_values[$label]%%[![:space:]]*}"}"
+        local value="${info_values[$label]}"
+        value="${value#"${value%%[![:space:]]*}"}"
 
-        # Move cursor to the label column and print label with color
-        if [[ "$SPACE_LABELINFO" != "yes" ]]; then
-            tput cup $((start_line + idx)) "$INFO_COL"
-            printf "%b%-${max_label}s%s%b" "$C_LABEL" "$label" "$POINTER_CHAR" "$C_RESET"
+        # Cursor no início da label
+        tput cup $((start_line + idx)) "$INFO_COL"
+
+        if [[ "$SPACE_LABELINFO" == "yes" ]]; then
+            # OS Arch Linux
+            printf "%b%s %b" "$C_LABEL" "$label" "$C_RESET"
+            value_col=$VALUE_START_COL
         else
-            tput cup $((start_line + idx)) "$INFO_COL"
-            printf "%b%-${max_label}s%b" "$C_LABEL" "$label" "$C_RESET"
+            # OS > Arch Linux
+            printf "%b%s %b%b%s%b" "$C_LABEL" "$label" "$C_RESET" "$C_VALUE" "$POINTER_CHAR" "$C_RESET"
+            value_col=$((INFO_COL + ${#label} + ${#POINTER_CHAR} + 1))
         fi
 
-        # Move cursor to the value column and print the value with color
-        [[ "$SPACE_LABELINFO" == "yes" ]] && tput cup $((start_line + idx)) "$VALUE_START_COL"
-        [[ "$SPACE_LABELINFO" != "yes" ]] && tput cup $((start_line + idx)) (( ${#label} + 1))
-        printf "%b%s%b" "$C_VALUE" "$value" "$C_RESET"
+        # Print value
+        tput cup $((start_line + idx)) "$value_col"
+        printf "%b%s%b" "$C_VALUE" " $value" "$C_RESET"
 
         ((idx++))
     done
-
-    # Return the number of printed lines
 }
+
+
 
 # -------------------------------
 # Print a group of info fields to stderr (for debug or overlay)
@@ -59,14 +62,6 @@ print_group_n() {
 
     for label in "${group[@]}"; do
         [[ ${SHOW[$label]:-0} != 1 || -z ${info_values[$label]} ]] && continue
-        local value="${info_values[$label]#"${info_values[$label]%%[![:space:]]*}"}"
-
-        tput cup $((start_line + idx)) "$INFO_COL" >&2
-        printf "%b%-${max_label}s%b" "$C_LABEL" "$label" "$C_RESET" >&2
-
-        tput cup $((start_line + idx)) "$VALUE_START_COL" >&2
-        printf "%b%s%b" "$C_VALUE" "$value" "$C_RESET" >&2
-
         ((idx++))
     done
 
