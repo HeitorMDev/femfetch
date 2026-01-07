@@ -13,6 +13,6 @@
 ## Installation (Arch Linux)
 
 ```bash
-git clone https://github.com/YourUsername/femfetch.git
+git clone https://github.com/HeitorMDev/femfetch.git
 cd femfetch
 makepkg -si
