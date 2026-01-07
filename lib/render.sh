@@ -88,28 +88,31 @@ print_separator() {
 # Render a small color palette or character preview
 # -------------------------------
 color_render() {
-    local pad="$1" char="$2" PALETTE_MODE="$3"
+    local line="$1"
+    local col="$2"
+    local char="  "
+    local c
+    local start_col="$col"
 
-    # Add spacing before the palette
-    printf '\n\n%*s' "$pad" ""
+    # linha 1 (0–7)
+    tput cup "$line" "$col"
+    for c in {0..7}; do
+        printf "%b%s%b" "\e[48;5;${c}m" "$char" "\e[0m"
+        ((col+=${#char}))
+        tput cup "$line" "$col"
+    done
 
-    # Print first row (colors 0-7)
-    case "$PALETTE_MODE" in
-        fg) for c in {0..7}; do printf "\e[38;5;%sm%s\e[0m" "$c" "$char"; done ;;
-        bg) for c in {0..7}; do printf "\e[48;5;%sm%s\e[0m" "$c" "$char"; done ;;
-        emoji) for c in {0..7}; do printf "%s" "$char"; done ;;
-    esac
-
-    # Move to next row with same padding
-    printf '\n%*s' "$pad" ""
-
-    # Print second row (colors 8-15)
-    case "$PALETTE_MODE" in
-        fg) for c in {8..15}; do printf "\e[38;5;%sm%s\e[0m" "$c" "$char"; done ;;
-        bg) for c in {8..15}; do printf "\e[48;5;%sm%s\e[0m" "$c" "$char"; done ;;
-        emoji) for c in {0..7}; do printf "%s" "$char"; done ;;
-    esac
-
-    # Final newline
-    printf '\n'
+    # linha 2 (8–15)
+    ((line++))
+    col="$start_col"
+    tput cup "$line" "$col"
+    for c in {8..15}; do
+        printf "%b%s%b" "\e[48;5;${c}m" "$char" "\e[0m"
+        ((col+=${#char}))
+        tput cup "$line" "$col"
+    done
 }
+
+
+
+

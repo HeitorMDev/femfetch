@@ -181,13 +181,20 @@ fi
 # Print info groups
 # -----------------------------
 print_separator INFO_SOFTWARE
-print_group INFO_SOFTWARE "$SKIPPING_LINES"
+
+instaprint=$(print_group INFO_SOFTWARE "$SKIPPING_LINES")
+echo "$instaprint"
 used=$(print_group_n INFO_SOFTWARE "$SKIPPING_LINES")
 ((SKIPPING_LINES += used))
+
 [[ "$SEPARATOR_GROUP" == "yes" ]] && print_separator INFO_SOFTWARE
-print_group INFO_HARDWARE "$SKIPPING_LINES"
+
+instaprint=$(print_group INFO_HARDWARE "$SKIPPING_LINES")
+echo "$instaprint"
 used=$(print_group_n INFO_HARDWARE "$SKIPPING_LINES")
 ((SKIPPING_LINES += used))
+
+color_render "$SKIPPING_LINES" "$INFO_COL" "$PALETTE_CHAR"
 
 # -----------------------------
 # GIF / ASCII rendering
