@@ -201,5 +201,5 @@ if [[ "$ANIMATION" == "yes" ]]; then
     sleep infinity
 else
     DISTRO=$(bash "$LIB_DIR/logoLoader.sh")
-    python3 "$DATA_DIR/AsciiGIF/renderJ.py" "$DATA_DIR/ascii/${DISTRO}.json" "$GIF_HEIGHT" "$GIF_WIDTH" --flat "$C_LABEL"
+    python3 "$DATA_DIR/AsciiGIF/renderJ.py" "$DATA_DIR/ascii/${DISTRO}.json" "$((GIF_HEIGHT - 4))" "$GIF_WIDTH" --flat "$C_LABEL"
 fi
