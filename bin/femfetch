@@ -196,8 +196,8 @@ used=$(print_group_n INFO_HARDWARE "$SKIPPING_LINES")
 if [[ "$ANIMATION" == "yes" ]]; then
     DISTRO=$(bash "$LIB_DIR/logoLoader.sh")      # Detect distro
     GIF_FINAL="$DISTRO_GIF_DIR/$DISTRO"
-    bash "$DATA_DIR/animKiller.sh" &              # Kill previous animation
     bash "$DATA_DIR/AsciiGIF/asgif" "$GIF_FINAL" &  # Launch GIF render
+    bash "$DATA_DIR/animKiller.sh" "$$" "$!" &              # Kill previous animation
 else
     DISTRO=$(bash "$LIB_DIR/logoLoader.sh")
     python3 "$DATA_DIR/AsciiGIF/renderJ.py" "$DATA_DIR/ascii/${DISTRO}.json" "$GIF_HEIGHT" "$GIF_WIDTH" --flat "$C_LABEL"
