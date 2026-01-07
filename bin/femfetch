@@ -27,9 +27,9 @@ version="femfetch 0.9b"      # Default version
 # Load helper libraries
 # -----------------------------
 
-source "/usr/share/femfetch/lib/layout.sh"         # Layout helpers (padding, width)
-source "/usr/share/femfetch/lib/femfetch-info.sh"     # Functions that collect system info
-source "/usr/share/femfetch/lib/render.sh"         # Rendering functions
+source "$LIB_DIR/layout.sh"         # Layout helpers (padding, width)
+source "$LIB_DIR/femfetch-info.sh"     # Functions that collect system info
+source "$LIB_DIR/render.sh"         # Rendering functions
 
 # -----------------------------
 # Colors

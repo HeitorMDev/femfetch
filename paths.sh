@@ -38,7 +38,7 @@ SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 # SCRIPT_DIR: Absolute path to the directory containing this script
 # readlink -f resolves symbolic links to get the real path
 
-LIB_DIR="/usr/share/femfetch/lib"
+LIB_DIR="$DATA_DIR/lib"
 # LIB_DIR: Directory where helper libraries or scripts are located
 
 # -------------------------------
