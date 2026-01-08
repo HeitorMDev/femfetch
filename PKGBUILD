@@ -29,8 +29,8 @@ package() {
     # Executables
     # -------------------------------
     install -Dm755 "bin/femfetch" "$pkgdir/usr/bin/femfetch"
-    install -Dm755 -t "$pkgdir/usr/bin/AsciiGIF" loadGIF           # rawGifer
-    install -Dm755 -t "$pkgdir/usr/bin/AsciiGIF" AsciiGen          # AsciiGen
+    install -Dm755 -t "$pkgdir/usr/bin/" loadGIF           # rawGifer
+    install -Dm755 -t "$pkgdir/usr/bin/" AsciiGen          # AsciiGen
 
     # -------------------------------
     # Libraries / helpers

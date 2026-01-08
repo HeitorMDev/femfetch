@@ -25,8 +25,8 @@ fi
 install -Dm755 bin/femfetch "$BIN_DIR/femfetch"
 
 install -d "$BIN_DIR/AsciiGIF"
-install -Dm755 loadGIF   "$BIN_DIR/AsciiGIF/loadGIF"
-install -Dm755 AsciiGen  "$BIN_DIR/AsciiGIF/AsciiGen"
+install -Dm755 loadGIF   "$BIN_DIR/loadGIF"
+install -Dm755 AsciiGen  "$BIN_DIR/AsciiGen"
 
 # -------------------------------
 # Libraries / helpers
