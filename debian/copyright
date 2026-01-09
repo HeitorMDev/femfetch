@@ -1,0 +1,7 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: femfetch
+Source: https://github.com/HeitorMDev/femfetch
+
+Files: *
+Copyright: 2026 Heitor Mota
+License: MIT

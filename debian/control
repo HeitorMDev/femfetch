@@ -1,0 +1,12 @@
+Source: femfetch
+Section: utils
+Priority: optional
+Maintainer: Heitor Mota <HeitorMota@proton.me>
+Build-Depends: debhelper (>= 13)
+Standards-Version: 4.6.2
+
+Package: femfetch
+Architecture: amd64
+Depends: bash, python3, imagemagick, figlet, ncurses-bin
+Description: A flashy terminal system info fetcher with ASCII/GIF animations
+ Femfetch is a terminal system information tool with animated ASCII and GIF rendering.

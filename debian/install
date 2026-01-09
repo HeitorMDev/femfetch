@@ -1,0 +1,7 @@
+main/src usr/bin
+main/data/lib usr/share/femfetch/lib
+main/data/helpers usr/share/femfetch
+main/data/asciitools usr/share/femfetch/AsciiGIF
+main/data/distros usr/share/femfetch/distros
+main/data/ascii usr/share/femfetch/ascii
+main/config etc/femfetch
