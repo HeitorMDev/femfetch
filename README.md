@@ -46,7 +46,7 @@ Then make its ascii version with
 ```bash
 AsciiGen [charset] [Image/GIF width]
 ```
-Set up config in  ```bash ~/.config/femfetch/femfetch.conf``` to
+Set up config in  ```~/.config/femfetch/femfetch.conf``` to
 ```bash
 ANIMATION="yes"
 CUSTOM_GIF="yes"
