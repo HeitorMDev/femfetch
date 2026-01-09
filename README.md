@@ -27,4 +27,30 @@ sudo apt install ./femfetch_1.0-1_amd64.deb
 ```
 
 
+# Configuration
+## Generate configuration file
+
+To generate the configuration file run the command down below
+```bash
+mkdir ~/.config/femfetch
+touch ~/.config/femfetch/femfetch.conf
+cat /etc/femfetch/femfetch.conf > femfetch
+```
+## Custom GIF/Image
+
+To run a custom gif/image within femfetch or by itself load the GIF/Image with
+```bash
+loadGIF [path to your gif/image]
+```
+Then make its ascii version with
+```bash
+AsciiGen [charset] [Image/GIF width]
+```
+Set up config in  ```bash ~/.config/femfetch/femfetch.conf``` to
+```bash
+ANIMATION="yes"
+CUSTOM_GIF="yes"
+CUSTOM_GIF_PATH="$HOME/.local/share/femfetch/frames"
+```
+
 
