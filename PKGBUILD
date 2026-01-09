@@ -48,7 +48,7 @@ package() {
     # -------------------------------
     # Hekoers
     # -------------------------------
-    install -Dm755 "data/helpers/*" "$pkgdir/usr/share/femfetch/"
+    install -Dm755 data/helpers/* "$pkgdir/usr/share/femfetch/"
 
     # -------------------------------
     # Frames and GIFs
@@ -64,9 +64,4 @@ package() {
     # -------------------------------
     install -d "$pkgdir/etc/femfetch"
     install -Dm644 "config/femfetch.conf" "$pkgdir/etc/femfetch/femfetch.conf"
-
-    # -------------------------------
-    # Paths helper
-    # -------------------------------
-    install -Dm755 "data/helpers/paths.sh" "$pkgdir/usr/share/femfetch/paths.sh"
 }
