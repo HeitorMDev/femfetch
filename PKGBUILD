@@ -46,9 +46,9 @@ package() {
     install -Dm755 -t "$pkgdir/usr/share/femfetch/AsciiGIF" "data/asciitools/asgif"
 
     # -------------------------------
-    # Anim killer script
+    # Hekoers
     # -------------------------------
-    install -Dm755 "data/helpers/animKiller.sh" "$pkgdir/usr/share/femfetch/animKiller.sh"
+    install -Dm755 "data/helpers/*" "$pkgdir/usr/share/femfetch/"
 
     # -------------------------------
     # Frames and GIFs
@@ -58,11 +58,6 @@ package() {
     install -d "$pkgdir/usr/share/femfetch/ascii"
     cp -r data/ascii/* "$pkgdir/usr/share/femfetch/ascii/"
     cp -r data/distros/* "$pkgdir/usr/share/femfetch/distros/"
-
-    # -------------------------------
-    # ASCII header
-    # -------------------------------
-    install -Dm644 "data/femfetch_ascii.txt" "$pkgdir/usr/share/femfetch/femfetch_ascii.txt"
 
     # -------------------------------
     # Configuration
