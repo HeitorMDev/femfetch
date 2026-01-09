@@ -38,13 +38,13 @@ cat /etc/femfetch/femfetch.conf > femfetch
 ```
 ## Custom GIF/Image
 
-To run a custom gif/image within femfetch or by itself load the GIF/Image with
+To run a custom gif/image within femfetch or by itself load you file with
 ```bash
-loadGIF [path to your gif/image]
+loadGIF [file path]
 ```
 Then make its ascii version with
 ```bash
-AsciiGen [charset] [Image/GIF width]
+AsciiGen [charset] [width]
 ```
 Set up config in  ```~/.config/femfetch/femfetch.conf``` to
 ```bash
