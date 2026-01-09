@@ -1,4 +1,5 @@
-<img width="32" height="1" alt="fempallete" src="https://github.com/user-attachments/assets/fbebd9db-e132-414a-b1f4-2e46a2fd41e5" />
+<img width="640" height="320" alt="femfetch_png" src="https://github.com/user-attachments/assets/9ce43e52-d183-47d5-baa4-df54721e0cdb" />
+
 # femfetch
 
 **femfetch** is a terminal system information tool, inspired by *neofetch*, focused on **ASCII art, GIFs, and system info**.
