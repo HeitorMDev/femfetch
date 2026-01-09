@@ -1,3 +1,5 @@
+<img width="640" height="320" alt="femfetch_png" src="https://github.com/user-attachments/assets/11fd738c-34f8-4674-adc2-dc50865e0d05" />
+
 # femfetch
 
 **femfetch** is a terminal system information tool, inspired by *neofetch*, focused on **ASCII art, GIFs, and system info**.
@@ -13,31 +15,16 @@
 ## Installation (Arch Linux)
 
 ```bash
-sudo apt install bash python3 imagemagick figlet
-
 git clone https://github.com/HeitorMDev/femfetch.git
 cd femfetch
 makepkg -si
+```
 
-
-Instalation (Debian/Ubuntu)
-
-sudo apt install bash python3 imagemagick figlet git
-
-git clone https://github.com/HeitorMDev/femfetch.git
-cd femfetch
-sudo ./install.sh
-
-
-Instalation (Fedora)
-
-sudo dnf install bash python3 ImageMagick figlet git
-
-git clone https://github.com/HeitorMDev/femfetch.git
-cd femfetch
-sudo ./install.sh
-
-
+## Instalation (Debian/Ubuntu)
+```bash
+curl -LO https://github.com/HeitorMDev/femfetch/releases/download/v1.0/femfetch_1.0-1_amd64.deb
+sudo apt install ./femfetch_1.0-1_amd64.deb
+```
 
 
 
