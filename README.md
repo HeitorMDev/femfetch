@@ -1,4 +1,4 @@
-<img width="800" height="160" alt="femfetch_png" src="https://github.com/user-attachments/assets/a52b9109-eb72-4c89-907a-c73ddd811783" />
+<img width="800" height="160" alt="femfetch_png" src="https://github.com/user-attachments/assets/ca66f560-2f7f-421f-8e99-71d59d0eda39" />
 
 # femfetch
 
