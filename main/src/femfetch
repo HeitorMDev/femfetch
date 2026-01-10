@@ -20,7 +20,7 @@ source "$CONFIG_DIR/femfetch.conf"
 # -----------------------------
 PADDING=${PADDING:-4}         # Default horizontal padding
 SKIPPING_LINES=0              # Tracks how many lines we already printed
-version="femfetch 0.9b"      # Default version
+version="femfetch v1.0.1"      # Default version
 
 # -----------------------------
 # Load helper libraries
@@ -201,8 +201,13 @@ color_render "$SKIPPING_LINES" "$INFO_COL" "$PALETTE_CHAR"
 # -----------------------------
 if [[ "$ANIMATION" == "yes" ]]; then
     DISTRO=$(bash "$LIB_DIR/logoLoader.sh")      # Detect distro
-    GIF_FINAL="$DISTRO_GIF_DIR/$DISTRO"
-    bash "$DATA_DIR/AsciiGIF/asgif" "$GIF_FINAL" &  # Launch GIF render
+
+    if [[ "$CUSTOM_GIF" == "yes" ]]; then
+        FINAL_GIF="$CUSTOM_GIF_PATH"
+    else
+        FINAL_GIF="$DISTRO_GIF_DIR/$DISTRO"
+    fi
+    bash "$DATA_DIR/AsciiGIF/asgif" "$FINAL_GIF" &  # Launch GIF render
     bash "$DATA_DIR/animKiller.sh" "$$" "$!" &   # Kill previous animation
 
     sleep infinity

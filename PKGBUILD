@@ -1,6 +1,6 @@
 # Maintainer: Your Name <youremail@example.com>
 pkgname=femfetch
-pkgver=1.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="A flashy terminal system info fetcher with ASCII/GIF animations"
 arch=('x86_64')
@@ -12,18 +12,18 @@ source=("https://github.com/HeitorMDev/femfetch/archive/refs/tags/v$pkgver.tar.g
 sha256sums=('SKIP') # replace with actual sha256sum
 
 pkgver() {
-    cd "$srcdir/femfetch-1.0"
+    cd "$srcdir/femfetch-1.0.1"
     echo "0.1"
 }
 
 build() {
-    cd "$srcdir/femfetch-1.0"
+    cd "$srcdir/femfetch-1.0.1"
     # nothing to compile, all scripts are interpreted
     :
 }
 
 package() {
-    cd "$srcdir/femfetch-1.0/main"
+    cd "$srcdir/femfetch-1.0.1/main"
 
     # -------------------------------
     # Executables
