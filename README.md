@@ -22,8 +22,8 @@ makepkg -si
 
 ## Instalation (Debian/Ubuntu)
 ```bash
-curl -LO https://github.com/HeitorMDev/femfetch/releases/download/v1.0/femfetch_1.0-1_amd64.deb
-sudo apt install ./femfetch_1.0-1_amd64.deb
+curl -LO https://github.com/HeitorMDev/femfetch/releases/download/v1.0/femfetch_1.0.1-1_amd64.deb
+sudo apt install ./femfetch_1.0.1-1_amd64.deb
 ```
 
 
